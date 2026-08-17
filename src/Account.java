@@ -1,7 +1,7 @@
 public class Account {
     String owner;
     int accountNumber;
-    int accountBalance;
+    private int accountBalance;
 
     Account(String owner, int accountNumber, int accountBalance) {
         this.owner = owner;
