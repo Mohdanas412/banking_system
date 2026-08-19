@@ -2,11 +2,13 @@ public class Account {
     String owner;
     int accountNumber;
     private int accountBalance;
+    private int minimumBalance;
 
-    Account(String owner, int accountNumber, int accountBalance) {
+    Account(String owner, int accountNumber, int accountBalance,int minimumBalance) {
         this.owner = owner;
         this.accountNumber = accountNumber;
         this.accountBalance = accountBalance;
+        this.minimumBalance = minimumBalance;
     }
 
     // Deposit Money
@@ -23,12 +25,15 @@ public class Account {
         if (amount <= 0) {
             return false;
         }
-        if (amount > accountBalance) {
+        if(amount > accountBalance) {
             return false;
         }
-        accountBalance -= amount; {
-            return true;
+        if (accountBalance - amount < minimumBalance) {
+            return false;
         }
+        accountBalance -= amount; 
+            return true;
+        
 
     }
     //Getter method : Read only window into accountBalance.
