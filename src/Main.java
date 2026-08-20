@@ -1,26 +1,103 @@
+import java.util.Scanner;
+
 public class Main {
+
     public static void main(String[] args) {
-        Account acc1 = new Account("Rahul", 1001, 5000,5000);
-        //acc1.accountBalance = 99999;
-        System.out.println("Start : " + acc1);
 
-        // Testing Deposit Method
+        Scanner sc = new Scanner(System.in);
+        Bank bank = new Bank();
 
-        System.out.println("Deposit 500 -> Success?" + acc1.deposit(500));
-        System.out.println("After :" + acc1);
+        while (true) {
 
-        System.out.println("Deposit -500 -> Success?" + acc1.deposit(-500));
-        System.out.println("After :" + acc1);
+            System.out.println("\n===== BANKING SYSTEM =====");
+            System.out.println("1. Open Account");
+            System.out.println("2. Deposit");
+            System.out.println("3. Withdraw");
+            System.out.println("4. Check Balance");
+            System.out.println("5. List All Accounts");
+            System.out.println("6. Exit");
+            System.out.print("Enter your choice: ");
 
-        //Testing Withdraw Method
+            int choice = sc.nextInt();
 
-        System.out.println("Withdraw 500 -> success? " + acc1.withdraw(500));
-        System.out.println("After: " + acc1);
+            switch (choice) {
 
-        System.out.println("Withdraw 1500 -> success? " + acc1.withdraw(1500));
-        System.out.println("After: " + acc1);
+                case 1:
+                    System.out.print("Enter account number: ");
+                    int accountNumber = sc.nextInt();
 
-        // Testing Getter Method
-        System.out.println("Balance via getter: " + acc1.getAccountBalance());
+                    sc.nextLine(); // consume leftover newline
+
+                    System.out.print("Enter account holder name: ");
+                    String owner = sc.nextLine();
+
+                    System.out.print("Enter initial balance: ");
+                    int accountBalance = sc.nextInt();
+
+                    System.out.print("Enter minimum balance: ");
+                    int minimumBalance = sc.nextInt();
+
+                    if (bank.openAccount(owner, accountNumber, accountBalance, minimumBalance)) {
+                    System.out.println("Account opened successfully!");
+                    } else {
+                    System.out.println("Account number already exists.");
+                    }
+                    break;
+
+                case 2:
+                    System.out.print("Enter account number: ");
+                    accountNumber = sc.nextInt();
+
+                    System.out.print("Enter amount to deposit: ");
+                    int depositAmount = sc.nextInt();
+
+                    if (bank.deposit(accountNumber, depositAmount)) {
+                        System.out.println("Deposit successful!");
+                    } else {
+                        System.out.println("Deposit failed.");
+                    }
+                    break;
+
+                case 3:
+                    System.out.print("Enter account number: ");
+                    accountNumber = sc.nextInt();
+
+                    System.out.print("Enter amount to withdraw: ");
+                    int withdrawAmount = sc.nextInt();
+
+                    if (bank.withdraw(accountNumber, withdrawAmount)) {
+                        System.out.println("Withdrawal successful!");
+                    } else {
+                        System.out.println("Withdrawal failed.");
+                    }
+                    break;
+
+                case 4:
+                    System.out.print("Enter account number: ");
+                    accountNumber = sc.nextInt();
+
+                    int balance = bank.checkBalance(accountNumber);
+
+                    if (balance == -1) {
+                        System.out.println("Account not found.");
+                    } else {
+                        System.out.println("Current balance: " + balance);
+                    }
+                    break;
+
+                case 5:
+                    System.out.println("\n===== ALL ACCOUNTS =====");
+                    bank.listAllAccounts();
+                    break;
+
+                case 6:
+                    System.out.println("Thank you for using the Banking System!");
+                    sc.close();
+                    return;
+
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
     }
 }
