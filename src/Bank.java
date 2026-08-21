@@ -10,7 +10,7 @@ public class Bank {
     public boolean openAccount(String owner,int accountNumber,int accountBalance,int minimumBalance){
         Account existing = findAccountByNumber(accountNumber);
     if (existing != null) {
-        return false;   // what should happen here — allow or reject?
+        return false; 
     }
         Account account = new Account(owner, accountNumber, accountBalance, minimumBalance); 
         accounts.add(account);
@@ -50,5 +50,24 @@ public class Bank {
             System.out.println(account);
         }
     }
+    public boolean transferFunds(int fromAccountNumber, int toAccountNumber, int amount) {
+    if (fromAccountNumber == toAccountNumber) {
+        return false;
+    }
+
+    Account fromAccount = findAccountByNumber(fromAccountNumber);
+    Account toAccount = findAccountByNumber(toAccountNumber);
+
+    if (fromAccount == null || toAccount == null) {
+        return false;
+    }
+
+    boolean withdrawn = fromAccount.withdraw(amount);
+    if (!withdrawn) {
+        return false; 
+    }
+
+    return toAccount.deposit(amount);
+}
 
 }

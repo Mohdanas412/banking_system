@@ -15,7 +15,8 @@ public class Main {
             System.out.println("3. Withdraw");
             System.out.println("4. Check Balance");
             System.out.println("5. List All Accounts");
-            System.out.println("6. Exit");
+            System.out.println("6. Transfer Funds");
+            System.out.println("7. Exit");
             System.out.print("Enter your choice: ");
 
             int choice = sc.nextInt();
@@ -91,6 +92,23 @@ public class Main {
                     break;
 
                 case 6:
+                    System.out.print("Enter source account number: ");
+                    int fromAccount = sc.nextInt();
+
+                    System.out.print("Enter destination account number: ");
+                    int toAccount = sc.nextInt();
+
+                    System.out.print("Enter amount to transfer: ");
+                    int transferAmount = sc.nextInt();
+
+                    if (bank.transferFunds(fromAccount, toAccount, transferAmount)) {
+                        System.out.println("Transfer successful!");
+                    } else {
+                        System.out.println("Transfer failed.");
+                    }
+                    break;    
+
+                case 7:
                     System.out.println("Thank you for using the Banking System!");
                     sc.close();
                     return;
