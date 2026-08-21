@@ -11,7 +11,7 @@ public class Account {
         this.minimumBalance = minimumBalance;
     }
 
-    // Deposit Money
+    
     public boolean deposit(int amount) {
         if (amount <= 0) {
             return false;
@@ -20,7 +20,7 @@ public class Account {
         return true;
     }
 
-    // Withdraw money.
+    
     public boolean withdraw(int amount) {
         if (amount <= 0) {
             return false;
@@ -36,7 +36,7 @@ public class Account {
         
 
     }
-    //Getter method : Read only window into accountBalance.
+    
 
     public int getAccountBalance() {
         return accountBalance;

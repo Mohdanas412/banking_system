@@ -27,7 +27,7 @@ public class Main {
                     System.out.print("Enter account number: ");
                     int accountNumber = sc.nextInt();
 
-                    sc.nextLine(); // consume leftover newline
+                    sc.nextLine(); 
 
                     System.out.print("Enter account holder name: ");
                     String owner = sc.nextLine();
