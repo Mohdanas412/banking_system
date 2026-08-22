@@ -2,13 +2,13 @@ public class Account {
     protected String owner;
     protected int accountNumber;
     protected int accountBalance;
-   // private int minimumBalance;
+   
 
-    Account(String owner, int accountNumber, int accountBalance/*int minimumBalance*/) {
+    Account(String owner, int accountNumber, int accountBalance) {
         this.owner = owner;
         this.accountNumber = accountNumber;
         this.accountBalance = accountBalance;
-        //this.minimumBalance = minimumBalance;
+        
     }
 
     
@@ -27,12 +27,8 @@ public class Account {
         if(amount > accountBalance) {
             throw new InsufficientFundsException("Withdrawal exceeds available balance!");
         }
-        /*if (accountBalance - amount < minimumBalance) {
-            throw new InsufficientFundsException("Withdrawal would breach minimum balance requirement!");
-        }*/
-        accountBalance -= amount; 
-        
 
+        accountBalance -= amount; 
     }
     
 
