@@ -35,15 +35,43 @@ public class Main {
                     System.out.print("Enter initial balance: ");
                     int accountBalance = sc.nextInt();
 
-                    System.out.print("Enter minimum balance: ");
+                    sc.nextLine();
+
+                    System.out.print("1. Savings  2. Current — choose type: ");
+                    int typeChoice = sc.nextInt();
+
+                    Account newAcc;
+                    if (typeChoice == 1) {
+                        System.out.println("Enter interest rate:");
+                        int interestRate = sc.nextInt();
+                        
+                        System.out.println("Enter Minimum Balance:");
+                        int minimumBalance = sc.nextInt();
+                        
+                      newAcc = new SavingsAccount(owner, accountNumber, accountBalance, minimumBalance ,interestRate);
+                    } else {
+                        System.out.println("Enter over draft limit :");
+                        int overdraftLimit = sc.nextInt();
+                        
+                        newAcc = new CurrentsAccount(owner, accountNumber, accountBalance, overdraftLimit);
+                     }
+
+                    if (bank.openAccount(newAcc)) {
+                      System.out.println("Account opened successfully!");
+                    } else {
+                      System.out.println("Account number already exists.");
+                    }
+                    break;
+
+                    /*System.out.print("Enter minimum balance: ");
                     int minimumBalance = sc.nextInt();
 
                     if (bank.openAccount(owner, accountNumber, accountBalance, minimumBalance)) {
                     System.out.println("Account opened successfully!");
                     } else {
                     System.out.println("Account number already exists.");
-                    }
-                    break;
+                    }*/
+                    
 
                 case 2:
                     System.out.print("Enter account number: ");

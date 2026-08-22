@@ -7,14 +7,13 @@ public class Bank {
     public Bank() {
         accounts = new ArrayList<>();
     }
-    public boolean openAccount(String owner,int accountNumber,int accountBalance,int minimumBalance){
-        Account existing = findAccountByNumber(accountNumber);
+    public boolean openAccount(Account account) {
+    Account existing = findAccountByNumber(account.accountNumber);
     if (existing != null) {
-        return false; 
+        return false;
     }
-        Account account = new Account(owner, accountNumber, accountBalance, minimumBalance); 
-        accounts.add(account);
-        return true;
+    accounts.add(account);
+    return true;
     }
     public Account findAccountByNumber(int accountNumber) {
         for(Account account : accounts) {
