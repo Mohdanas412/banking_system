@@ -1,7 +1,7 @@
 public class Account {
-    String owner;
-    int accountNumber;
-    private int accountBalance;
+    protected String owner;
+    protected int accountNumber;
+    protected int accountBalance;
     private int minimumBalance;
 
     Account(String owner, int accountNumber, int accountBalance,int minimumBalance) {
