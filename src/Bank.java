@@ -24,24 +24,24 @@ public class Bank {
         }
         return null;
     }
-    public boolean deposit(int accountNumber,int amount) {
+    public void deposit(int accountNumber,int amount) throws InvalidAccountException,InvalidAmountException {
         Account account = findAccountByNumber(accountNumber);
         if (account == null){
-            return false;
+            throw new InvalidAccountException("Account doesnt Exists!");
         }
-        return account.deposit(amount);
+        account.deposit(amount);
     }
-    public boolean withdraw(int accountNumber , int amount) {
+    public void withdraw(int accountNumber , int amount) throws InvalidAccountException,InvalidAmountException,InsufficientFundsException {
         Account account = findAccountByNumber(accountNumber);
         if (account == null) {
-            return false;
+            throw new InvalidAccountException("Account doesn't Exists");
         }
-        return account.withdraw(amount);
+        account.withdraw(amount);
     }
-    public int checkBalance(int acccountNumber){
+    public int checkBalance(int acccountNumber) throws InvalidAccountException{
         Account account = findAccountByNumber(acccountNumber);
         if(account == null) {
-            return -1;
+            throw new InvalidAccountException("Account doesn't Exists");
         }
         return account.getAccountBalance();
     }
@@ -50,24 +50,19 @@ public class Bank {
             System.out.println(account);
         }
     }
-    public boolean transferFunds(int fromAccountNumber, int toAccountNumber, int amount) {
+    public void transferFunds(int fromAccountNumber, int toAccountNumber, int amount) throws InvalidAccountException,InsufficientFundsException,InvalidAmountException {
     if (fromAccountNumber == toAccountNumber) {
-        return false;
+        throw new InvalidAccountException("Same Account ! Funds can't be trasnfer.");
     }
 
     Account fromAccount = findAccountByNumber(fromAccountNumber);
     Account toAccount = findAccountByNumber(toAccountNumber);
 
     if (fromAccount == null || toAccount == null) {
-        return false;
+        throw new InvalidAccountException("Account doesn't Exists");
     }
-
-    boolean withdrawn = fromAccount.withdraw(amount);
-    if (!withdrawn) {
-        return false; 
-    }
-
-    return toAccount.deposit(amount);
+    fromAccount.withdraw(amount);
+    toAccount.deposit(amount);
 }
 
 }

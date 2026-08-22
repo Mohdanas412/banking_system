@@ -12,27 +12,25 @@ public class Account {
     }
 
     
-    public boolean deposit(int amount) {
+    public void deposit(int amount) throws InvalidAmountException {
         if (amount <= 0) {
-            return false;
+            throw new InvalidAmountException("Amount must be positive!");
         }
         accountBalance += amount;
-        return true;
     }
 
     
-    public boolean withdraw(int amount) {
+    public void withdraw(int amount) throws InvalidAmountException,InsufficientFundsException {
         if (amount <= 0) {
-            return false;
+            throw new InvalidAmountException("Amount must be positive!");
         }
         if(amount > accountBalance) {
-            return false;
+            throw new InsufficientFundsException("Withdrawal exceeds available balance!");
         }
         if (accountBalance - amount < minimumBalance) {
-            return false;
+            throw new InsufficientFundsException("Withdrawal would breach minimum balance requirement!");
         }
         accountBalance -= amount; 
-            return true;
         
 
     }

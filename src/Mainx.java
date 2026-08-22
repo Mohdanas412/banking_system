@@ -1,4 +1,4 @@
-public class Mainx {
+/*public class Mainx {
     public static void main(String[] args) {
         Account acc1 = new Account("Rahul", 1001, 5000,5000);
         //acc1.accountBalance = 99999;
@@ -23,4 +23,4 @@ public class Mainx {
         
         System.out.println("Balance via getter: " + acc1.getAccountBalance());
     }
-}
+}*/

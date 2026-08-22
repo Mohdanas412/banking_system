@@ -48,16 +48,16 @@ public class Main {
                 case 2:
                     System.out.print("Enter account number: ");
                     accountNumber = sc.nextInt();
-
                     System.out.print("Enter amount to deposit: ");
                     int depositAmount = sc.nextInt();
 
-                    if (bank.deposit(accountNumber, depositAmount)) {
-                        System.out.println("Deposit successful!");
-                    } else {
-                        System.out.println("Deposit failed.");
+                try {
+                    bank.deposit(accountNumber, depositAmount);
+                    System.out.println("Deposit successful!");
+                } catch (InvalidAccountException | InvalidAmountException e) {
+                    System.out.println(e.getMessage());
                     }
-                    break;
+                 break;
 
                 case 3:
                     System.out.print("Enter account number: ");
@@ -66,10 +66,12 @@ public class Main {
                     System.out.print("Enter amount to withdraw: ");
                     int withdrawAmount = sc.nextInt();
 
-                    if (bank.withdraw(accountNumber, withdrawAmount)) {
+                    try {
+                        bank.withdraw(accountNumber, withdrawAmount); 
                         System.out.println("Withdrawal successful!");
-                    } else {
-                        System.out.println("Withdrawal failed.");
+              
+                    } catch (InvalidAccountException | InvalidAmountException |InsufficientFundsException e) {
+                        System.out.println(e.getMessage());
                     }
                     break;
 
@@ -77,12 +79,11 @@ public class Main {
                     System.out.print("Enter account number: ");
                     accountNumber = sc.nextInt();
 
+                    try {
                     int balance = bank.checkBalance(accountNumber);
-
-                    if (balance == -1) {
-                        System.out.println("Account not found.");
-                    } else {
-                        System.out.println("Current balance: " + balance);
+                    System.out.println("Current balance: " + balance);
+                    } catch (InvalidAccountException e) {
+                        System.out.println(e.getMessage());
                     }
                     break;
 
@@ -101,12 +102,13 @@ public class Main {
                     System.out.print("Enter amount to transfer: ");
                     int transferAmount = sc.nextInt();
 
-                    if (bank.transferFunds(fromAccount, toAccount, transferAmount)) {
-                        System.out.println("Transfer successful!");
-                    } else {
-                        System.out.println("Transfer failed.");
+                    try {
+                    bank.transferFunds(fromAccount, toAccount, transferAmount);
+                    System.out.println("Transfer successful!");
+                    } catch (InvalidAccountException | InvalidAmountException | InsufficientFundsException e) {
+                     System.out.println(e.getMessage());
                     }
-                    break;    
+                    break;
 
                 case 7:
                     System.out.println("Thank you for using the Banking System!");
